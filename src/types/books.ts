@@ -9,6 +9,10 @@ export type BookState = {
   booksByAuthor: BooksByAuthor[];
   bookListBySubCategory: BookListBySubCategory;
   booksBySubCategory: BooksBySubCategory[];
+  bookListByCollection: BookListByCollection;
+  booksByCollection: BooksByCollection[];
+  bookListByTag: BookListByTag;
+  booksByTag: BooksByTag[];
   bookParam: BookParam;
   bookDetail: BookDetail;
   relatedBook: RelatedBook[];
@@ -50,6 +54,47 @@ export type BooksBySubCategory = {
   slug: string;
   price: number;
   discounted_price: number;
+  is_preorder: number;
+  image_url: string;
+};
+
+export type BookListByCollection = {
+  data: BooksByCollection[];
+  link: Links;
+  meta: Meta;
+  path: string;
+  per_page: number;
+  to: number;
+  total: number;
+};
+export type BooksByCollection = {
+  id: number;
+  name: string;
+  slug: string;
+  price: number;
+  discounted_price: number;
+  authors: Author[];
+  is_preorder: number;
+  image_url: string;
+};
+
+export type BookListByTag = {
+  data: BooksByTag[];
+  link: Links;
+  meta: Meta;
+  path: string;
+  per_page: number;
+  to: number;
+  total: number;
+};
+
+export type BooksByTag = {
+  id: number;
+  name: string;
+  slug: string;
+  price: number;
+  discounted_price: number;
+  authors: Author[];
   is_preorder: number;
   image_url: string;
 };

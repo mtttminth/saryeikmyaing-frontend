@@ -5,12 +5,16 @@ import {
   BookParam,
   BookState,
   BookDetail,
+  BookListByCollection,
+  BookListByTag,
 } from "@/types/books";
 import {
   fetchBooksBySubCategory,
   fetchBooksByAuthor,
   fetchBookDetail,
   fetchRelatedBook,
+  fetchBooksByCollection,
+  fetchBooksByTag,
 } from "../thunks/bookThunk";
 
 const initialState: BookState = {
@@ -22,6 +26,10 @@ const initialState: BookState = {
   booksBySubCategory: [],
   bookListByAuthor: {} as BookListByAuthor,
   booksByAuthor: [],
+  bookListByCollection: {} as BookListByCollection,
+  booksByCollection: [],
+  bookListByTag: {} as BookListByTag,
+  booksByTag: [],
   bookParam: {} as BookParam,
   bookDetail: {} as BookDetail,
   relatedBook: [],
@@ -59,7 +67,6 @@ const bookSlice = createSlice({
         state.loading = false;
         state.bookErrors = action.payload;
       })
-
       // fetchBookByAuthor
       .addCase(fetchBooksByAuthor.pending, (state, action) => {
         state.loading = true;
@@ -94,6 +101,32 @@ const bookSlice = createSlice({
         state.relatedBook = action.payload;
       })
       .addCase(fetchRelatedBook.rejected, (state, action) => {
+        state.loading = false;
+        state.bookErrors = action.payload;
+      })
+      // fetchBookByCollection
+      .addCase(fetchBooksByCollection.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(fetchBooksByCollection.fulfilled, (state, action) => {
+        state.loading = false;
+        state.bookListByCollection = action.payload;
+        state.booksByCollection = action.payload.data;
+      })
+      .addCase(fetchBooksByCollection.rejected, (state, action) => {
+        state.loading = false;
+        state.bookErrors = action.payload;
+      })
+      // fetchBookByTag
+      .addCase(fetchBooksByTag.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(fetchBooksByTag.fulfilled, (state, action) => {
+        state.loading = false;
+        state.bookListByTag = action.payload;
+        state.booksByTag = action.payload.data;
+      })
+      .addCase(fetchBooksByTag.rejected, (state, action) => {
         state.loading = false;
         state.bookErrors = action.payload;
       });

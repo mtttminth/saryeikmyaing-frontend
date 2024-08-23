@@ -15,9 +15,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Skeleton } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store/store";
 import { fetchCollections } from "@/store/thunks/collectionThunk";
@@ -27,6 +27,7 @@ import { fetchAdminReview } from "@/store/thunks/adminReviewThunk";
 const HomeScreen = () => {
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
+  const searchParams = useSearchParams();
   const { collectionLoading, collections } = useSelector(
     (state: RootState) => state.collection
   );
@@ -42,7 +43,15 @@ const HomeScreen = () => {
     dispatch(fetchPreorders());
     dispatch(fetchAdminReview(reviewParam));
   }, [dispatch]);
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, value);
 
+      return params.toString();
+    },
+    [searchParams]
+  );
   const AdminReviews = adminReview?.slice(0, 3) || [];
   const collectionSettings = {
     dots: false,
@@ -112,6 +121,13 @@ const HomeScreen = () => {
                   </div>
                   <div className="text-center mt-4">
                     <Button
+                      onClick={() =>
+                        router.push(
+                          `/booksbycollection/${collect.id}` +
+                            "?" +
+                            createQueryString("name", collect.name)
+                        )
+                      }
                       variant="contained"
                       sx={{ backgroundColor: "#CACACA", color: "#000000" }}
                     >

@@ -27,9 +27,29 @@ const getRelatedBook = async (id: number) => {
   return api.get(`/books/${id}/related`).then((response) => response.data);
 };
 
+const getBooksByCollection = async (id: number, params: BookParam) => {
+  const formattedParams = {
+    ...params,
+  };
+  return api
+    .get(`/collections/${id}/books`, { params: formattedParams })
+    .then((response) => response.data);
+};
+
+const getBooksByTag = async (id: number, params: BookParam) => {
+  const formattedParams = {
+    ...params,
+  };
+  return api
+    .get(`/tags/${id}/books`, { params: formattedParams })
+    .then((response) => response.data);
+};
+
 export default {
   getBooksBySubCategory,
   getBooksByAuthor,
   getBookDetail,
   getRelatedBook,
+  getBooksByCollection,
+  getBooksByTag,
 };

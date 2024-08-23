@@ -11,7 +11,6 @@ import {
 } from "@mui/material";
 import { useState, useEffect } from "react";
 import Slider from "react-slick";
-import { Icon } from "@iconify/react";
 import React from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -169,9 +168,19 @@ const BookDetailScreen = ({ params }: { params: pageParam }) => {
             <div className="flex">
               {bookDetail?.tags &&
                 bookDetail?.tags?.map((tag) => (
-                  <div className="bg-gray-300 mb-4 mr-2">
-                    <p className="px-4 py-1 text-xs text-black">#{tag.name}</p>
-                  </div>
+                  <Link
+                    href={{
+                      pathname: `/booksbytag/${tag.id}`,
+                      query: { name: tag.name }, // the data
+                    }}
+                    key={tag.id}
+                  >
+                    <div className="bg-gray-300 mb-4 mr-2">
+                      <p className="px-4 py-1 text-xs text-black">
+                        #{tag.name}
+                      </p>
+                    </div>
+                  </Link>
                 ))}
             </div>
           </div>

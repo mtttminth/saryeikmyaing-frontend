@@ -65,3 +65,34 @@ export const fetchRelatedBook = createAsyncThunk(
     }
   }
 );
+export const fetchBooksByCollection = createAsyncThunk(
+  "book/fetchBooksByCollection",
+  async ({ id, params }: { id: number; params: BookParam }, thunkAPI) => {
+    try {
+      const res = await bookService.getBooksByCollection(id, params);
+      return res;
+    } catch (err: any) {
+      return thunkAPI.rejectWithValue({
+        status: err.response.status,
+        message: err.response.data.message,
+        errors: err.response.data.errors,
+      });
+    }
+  }
+);
+
+export const fetchBooksByTag = createAsyncThunk(
+  "book/fetchBooksByTag",
+  async ({ id, params }: { id: number; params: BookParam }, thunkAPI) => {
+    try {
+      const res = await bookService.getBooksByTag(id, params);
+      return res;
+    } catch (err: any) {
+      return thunkAPI.rejectWithValue({
+        status: err.response.status,
+        message: err.response.data.message,
+        errors: err.response.data.errors,
+      });
+    }
+  }
+);
