@@ -97,7 +97,7 @@ const HomeScreen = () => {
                           >
                             {collect.books &&
                               collect.books.map((book) => (
-                                <Link href="#" className="px-2" key={book.id}>
+                                <Link href={`/book-detail/${book.id}`} className="px-2" key={book.id}>
                                   <img
                                     src={book.image_url}
                                     className="h-auto max-w-full"
@@ -107,7 +107,7 @@ const HomeScreen = () => {
                           </Slider>
                         ) : (
                           collect.books.map((book) => (
-                            <Link href="#" className="px-2" key={book.id}>
+                            <Link href={`/book-detail/${book.id}`} className="px-2" key={book.id}>
                               <img
                                 src={book.image_url}
                                 className="h-auto max-w-full"

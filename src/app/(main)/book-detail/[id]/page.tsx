@@ -109,7 +109,7 @@ const BookDetailScreen = ({ params }: { params: pageParam }) => {
               </p>
             </div>
             <div className="bg-gray-300 mb-4">
-              {bookDetail.discounted_price != null ? (
+              {bookDetail.discounted_price != bookDetail.price ? (
                 <p className="px-4 py-2 text-black">
                   စျေးနှုန်း -
                   <span className="px-4 text-xs text-red-500 pr-2 line-through">
@@ -261,7 +261,7 @@ const BookDetailScreen = ({ params }: { params: pageParam }) => {
         {relatedBook &&
           relatedBook.map((book) => (
             <Grid xs={12} sm={6} md={3} sx={{ marginBottom: 3 }}>
-              <Link href={``}>
+              <Link href={`/book-detail/${book.id}`}>
                 <div className="grid place-items-center pb-2">
                   <img
                     src={book.image_url}
@@ -272,7 +272,7 @@ const BookDetailScreen = ({ params }: { params: pageParam }) => {
                 <p className="truncate text-slate-900 text-sm leading-7">
                   {book.name}
                 </p>
-                {book.discounted_price != null ? (
+                {book.discounted_price != book.price ? (
                   <p className="text-sm text-cyan-500 leading-10">
                     <span className="text-xs text-red-500 pr-2 line-through">
                       {book.price} MMK

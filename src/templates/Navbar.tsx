@@ -130,8 +130,8 @@ const UserNavBar = (props: Props) => {
                     onClose={handleCloseUserMenu}
                   >
                     {authors.map((author) => (
-                      <Link href={`/booksbyauthor/${author.id}`}>
-                        <MenuItem key={author.id} onClick={handleCloseUserMenu}>
+                      <Link href={`/booksbyauthor/${author.id}`} key={author.id}>
+                        <MenuItem onClick={handleCloseUserMenu}>
                           {author.name}
                         </MenuItem>
                       </Link>

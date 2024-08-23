@@ -99,7 +99,7 @@ const BookByTagScreen = ({ params }: { params: PageParams }) => {
             ))
           : booksByTag.map((book) => (
               <Grid xs={12} sm={6} md={3} sx={{ mb: 3, p: 1 }} key={book.id}>
-                <Link href={`#`}>
+                <Link href={`/book-detail/${book.id}`}>
                   <div className="grid place-items-center pb-2 relative">
                     <img
                       src={book.image_url}
@@ -123,7 +123,7 @@ const BookByTagScreen = ({ params }: { params: PageParams }) => {
                       <FavoriteBorderIcon />
                     </IconButton>
                   </div>
-                  {book.discounted_price != null ? (
+                  {book.discounted_price != book.price ? (
                     <p className="text-sm text-cyan-500 leading-10">
                       <span className="text-xs text-red-500 pr-2 line-through">
                         {book.price} MMK
